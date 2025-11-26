@@ -1,0 +1,58 @@
+---
+title: "MODEL_TITLE_PLACEHOLDER – Development & Documentation"
+author: "Model SME"
+format: html
+params:
+  model_id: "MODEL_ID_PLACEHOLDER"
+---
+
+```{r}
+#| echo: false
+library(nzera)
+model_id <- params$model_id
+meta   <- get_model_metadata(model_id)
+schema <- get_model_schema(model_id)
+````
+
+# 1. Overview
+
+* **Model ID:** `r meta$id`
+* **Title:** `r meta$title`
+* **Version:** `r meta$version`
+* **Status:** `r meta$status`
+* **Owners:** `r paste(meta$owners, collapse = ", ")`
+
+## 1.1 Purpose
+
+Describe the purpose of this model in 3–5 sentences.
+
+# 2. Literature and sources
+
+List key references and data sources (you can expand beyond `meta$references`).
+
+# 3. Conceptual model and equations
+
+...
+
+# 4. Data requirements and structure
+
+```{r}
+## document the schema
+```
+
+# 5. Step-by-step implementation (development log)
+
+(Working code, experiments, validation, etc.)
+
+# 6. Finalised algorithm (for extraction)
+
+...
+
+# 7. Limitations and uncertainties
+
+...
+
+# 8. Decision log and change log
+
+(Use tables for decisions and changes.)
+

@@ -1,0 +1,127 @@
+---
+title: "Example Pesticide Model Documentation"
+subtitle: "DEMONSTRATION MODEL - FOR TEACHING PURPOSES ONLY"
+format: html
+---
+
+::: {.callout-warning}
+## DEMONSTRATION MODEL ONLY
+
+**THIS IS A SIMPLIFIED DEMONSTRATION MODEL FOR TEACHING PURPOSES.**
+
+This model uses fictitious calculations and should **NOT** be used for:
+- Actual ecological assessments
+- Environmental management decisions
+- Regulatory compliance
+- Conservation planning
+- Scientific research
+
+This model exists solely to demonstrate the NZERA framework's capability to handle multiple ecological models.
+:::
+
+## Overview
+
+This is an example pesticide exposure and risk assessment model for demonstration purposes.
+
+## Purpose
+
+This model demonstrates:
+
+1. **Framework Capabilities:** Shows how the NZERA framework handles multiple models
+2. **Multi-domain Support:** Illustrates ecological risk assessment alongside toxicology
+3. **Interface Consistency:** Uses the same `_run()`, `_metadata()`, `_schema()` pattern
+
+## Background
+
+This model is a fictitious example created solely for educational purposes. It does not represent any real-world pesticide or assessment methodology.
+
+## Equations and/or Conceptual Model
+
+1. **Exposure Calculation:**
+   $$ \text{Exposure} = \frac{\text{Application Rate} \times \text{Area}}{\text{Body Weight}} $$
+Where:
+- Application Rate = pesticide application rate (kg/ha)
+- Area = area of application (ha)
+- Body Weight = weight of the exposed organism (kg)
+
+2. **Risk Assessment:**
+   $$ \text{Risk} = \frac{\text{Exposure}}{\text{Toxicity}} $$
+Where:
+- Toxicity = toxicity of the pesticide (mg/kg)
+- Area = area of application (ha)
+
+
+## Inputs
+
+### Required Parameters
+
+| Parameter | Type | Description | Units |
+|-----------|------|-------------|-------|
+| application_rate | numeric | Pesticide application rate | kg/ha |
+| area | numeric | Application area | ha |
+
+### Optional Parameters
+
+| Parameter | Type | Description | Default |
+|-----------|------|-------------|---------|
+| drift_factor | numeric | Drift reduction factor | 0.1 |
+
+## Model Outputs
+
+| Parameter | Type | Description | Units |
+|-----------|------|-------------|-------|
+| exposure | numeric | Estimated exposure level | mg/kg |
+| risk | numeric | Risk quotient | dimensionless |
+
+
+
+## Methods
+
+The model uses simplified assumptions to calculate exposure based on application rates and environmental factors.
+
+## Assumptions
+
+- Uniform application
+- Standard environmental conditions
+- No degradation during assessment period
+
+## Assumptions, Limitations, and Decisions
+
+- Simplified model for demonstration
+- Not validated for regulatory use
+
+## References and Data Sources
+
+None - example model only.
+
+
+## Development Log
+
+- 2025-11-16 Initial model development
+
+
+
+## Validation and Sensitivity Analysis
+
+- Not applicable for this demonstration model.
+
+
+## Examples
+
+```{r}
+# library(nzera)
+#
+# input <- data.frame(
+#   application_rate = 2.5,
+#   area = 10
+# )
+#
+# results <- model_example_pesticide(input)
+```
+
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 0.1.0   | 2025-11-16 | Initial example version |
