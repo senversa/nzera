@@ -120,7 +120,7 @@ nzera/
 ├── model_docs/
 │   ├── template/                # Quarto documentation template
 │   └── <model_id>/              # SME-prepared narrative docs
-├── tests/testhat/              # Core framework tests
+├── tests/testthat/              # Core framework tests
 │   └── test_<model_id>.R        # Unit tests per model
 ├── docs/
 │   ├── framework_overview.qmd   # High-level explanation

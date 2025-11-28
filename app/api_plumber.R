@@ -9,8 +9,7 @@ library(nzera)
 #* Get list of available models
 #* @get /models
 function() {
-  registry <- list_models()
-  return(registry$id)
+  list_models() # returns tibble with id/title/version/status/owners/doc_path
 }
 
 #* Get model metadata
@@ -33,24 +32,43 @@ function(model_name) {
 #* @param model_name Name of the model
 #* @param input_data:object Input data for the model
 #* @post /models/<model_name>/run
-function(model_name, input_data) {
-  # Validate input
-  validate_model_input(input_data, model_name)
+#* Run a model
+#* @post /models/<model_name>/run
+function(model_name, input_data, params = list(), config = list()) {
+  df <- tryCatch(
+    as.data.frame(input_data, stringsAsFactors = FALSE),
+    error = function(e) {
+      plumber::abort(
+        http_status = 400,
+        message = "input_data must be a table/list of records"
+      )
+    }
+  )
 
-  # Get and run model
-  model <- get_model(model_name)
-  results <- model(input_data)
+  schema <- get_model_schema(model_name)
 
-  # Validate output
-  validate_model_output(results, model_name)
-  return(results)
+  tryCatch(
+    validate_input(df, schema, strict = TRUE),
+    error = function(e) plumber::abort(http_status = 400, message = e$message)
+  )
+
+  tryCatch(
+    run_model(
+      model_id = model_name,
+      data = df,
+      params = params,
+      config = config
+    ),
+    error = function(e) plumber::abort(http_status = 500, message = e$message)
+  )
 }
+
 
 #* Health check
 #* @get /health
 function() {
   list(
-    status = "heathy",
+    status = "healthy",
     timestamp = Sys.time()
   )
 }

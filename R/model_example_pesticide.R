@@ -35,7 +35,7 @@ model_example_pesticide_metadata <- function() {
     ecosystems = c("freshwater"),
     inputs = c("species", "concentration", "toxicity_factor"),
     outputs = c("species", "concentration", "toxicity_factor", "risk_score"),
-    doc_path = "model_docs/example/example_pesticide.qmd",
+    doc_path = "model_docs/example_pesticide.qmd",
     references = c("Smith et al. 2025 J Env Sci (placeholder)"),
     notes = "Template model to illustrate the standard interface."
   )

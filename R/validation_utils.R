@@ -6,7 +6,7 @@
 #'
 #' @return Invisibly returns TRUE if valid; otherwise throws an error
 #' @export
-validate_input <- function(data, schema, strict = FALSE) {
+validate_input <- function(data, schema, strict = FALSE, na_check = TRUE) {
   # Check required columns present
   missing <- schema$field[schema$mandatory & !(schema$field %in% names(data))]
   if (length(missing) > 0) {
@@ -26,28 +26,28 @@ validate_input <- function(data, schema, strict = FALSE) {
       next
     }
 
-    expected_type <- schema$type[i]
-    actual <- data[[fld]]
+    val <- data[[fld]]
+    if (na_check && schema$mandatory[i] && any(is.na(val))) {
+      stop("Field '", fld, "' has NA values but is mandatory")
+    }
 
     ok <- switch(
-      expected_type,
-      "numeric" = is.numeric(actual),
-      "character" = is.character(actual) || is.factor(actual),
-      "integer" = is.integer(actual),
+      schema$type[i],
+      numeric = is.numeric(val),
+      character = is.character(val) || is.factor(val),
+      integer = is.integer(val),
       TRUE
     )
-
-    if (!isTRUE(ok)) {
-      warning(
+    if (!ok) {
+      stop(
         "Field '",
         fld,
-        "' does not match expected type '",
-        expected_type,
-        "'. Class is: ",
-        paste(class(actual), collapse = ", ")
+        "' expected type '",
+        schema$type[i],
+        "' got: ",
+        paste(class(val), collapse = ", ")
       )
     }
   }
-
   invisible(TRUE)
 }

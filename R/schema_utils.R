@@ -7,8 +7,12 @@ write_input_template <- function(model_id, path = NULL) {
   schema <- get_model_schema(model_id)
 
   if (is.null(path)) {
-    dir.create("data/input_templates", showWarnings = FALSE, recursive = TRUE)
-    path <- file.path("data/input_templates", paste0(model_id, "_input_template.csv"))
+    path <- file.path(
+      tempdir(),
+      "nzera/input_templates",
+      paste0(model_id, "_input_template.csv")
+    )
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   }
 
   # Only write header row (blank example)

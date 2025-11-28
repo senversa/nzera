@@ -37,42 +37,29 @@ This model is a fictitious example created solely for educational purposes. It d
 
 ## Equations and/or Conceptual Model
 
-1. **Exposure Calculation:**
-   $$ \text{Exposure} = \frac{\text{Application Rate} \times \text{Area}}{\text{Body Weight}} $$
-Where:
-- Application Rate = pesticide application rate (kg/ha)
-- Area = area of application (ha)
-- Body Weight = weight of the exposed organism (kg)
+The model estimates risk score based on pesticide concentration and species-specific toxicity factors using the equation:
 
-2. **Risk Assessment:**
-   $$ \text{Risk} = \frac{\text{Exposure}}{\text{Toxicity}} $$
-Where:
-- Toxicity = toxicity of the pesticide (mg/kg)
-- Area = area of application (ha)
+\[\text{risk\_score} = \text{concentration} \times \text{toxicity\_factor}\]
 
 
 ## Inputs
 
 ### Required Parameters
 
+
 | Parameter | Type | Description | Units |
 |-----------|------|-------------|-------|
-| application_rate | numeric | Pesticide application rate | kg/ha |
-| area | numeric | Application area | ha |
+| species | character | Species identifier | - |
+| concentration | numeric | Pesticide concentration in water | mg/L |
+| toxicity_factor | numeric | Toxicity factor derived from toxicity data | dimensionless |
 
-### Optional Parameters
-
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| drift_factor | numeric | Drift reduction factor | 0.1 |
 
 ## Model Outputs
 
+
 | Parameter | Type | Description | Units |
 |-----------|------|-------------|-------|
-| exposure | numeric | Estimated exposure level | mg/kg |
-| risk | numeric | Risk quotient | dimensionless |
-
+| risk_score | numeric | Calculated risk score for the species | dimensionless |
 
 
 ## Methods
@@ -112,11 +99,12 @@ None - example model only.
 # library(nzera)
 #
 # input <- data.frame(
-#   application_rate = 2.5,
-#   area = 10
+#    species        = c("Fish", "Crab"),
+#    concentration  = c(2.5, 1.1),
+#    toxicity_factor= c(0.8, 1.3)
 # )
 #
-# results <- model_example_pesticide(input)
+# results <- model_example_pesticide_run(input)
 ```
 
 

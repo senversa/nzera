@@ -2,23 +2,21 @@ Package: nzera
 Type: Package
 Title: New Zealand Environmental Risk Modelling and Assessment
 Version: 0.0.1
-Authors@R: person("First", "Last", email = "Andrew.Barker@Senversa.com.au", role = c("aut", "cre"))
-Description: Framework for building, documenting, and running ecological and pesticide risk models in a consistent, transparent way for regulatory use.
-License: AGPL-3.0
+Authors@R: person("Andrew", "Barker", email = "Andrew.Barker@Senversa.com.au", role = c("aut", "cre"))
+Description: Demonstration framework for building, documenting, and running risk models in a consistent, transparent way for regulatory use.
+License: file LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports:
     tibble,
-    dplyr,
-    purrr,
     readr,
-    testthat (>= 3.0.0)
-Suggests:
-    knitr,
-    rmarkdown,
     shiny,
     plumber,
     quarto
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
